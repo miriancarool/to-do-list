@@ -1,0 +1,178 @@
+@charset "UTF-8";
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*O tamanho da caixa é exatamente o que eu definir no width e height, sem crescer por causa do padding e da borda, tamanho real Layout previsível sem supresa de soma de 'coisas invisíveis'*/
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Container ou contêiner? kk com a imagem de fundo */
+.app {
+  min-height: 100vh;
+  background-image: url("../fotos/montanha_ceu_rosa.jpg");
+  background-size: cover;       /*cobre tudo, cresce, estica, corta se necessario mas sem distorcer, matém a proporção*/
+  background-position: center;  /*foca no ponto central */
+  background-repeat: no-repeat; /*não estou precisando pq a imagem é grande, mas vou manter pq pode evitar problemas no futuro*/
+  background-color: #dd92b6;  /*fallback (plano b) caso não carregue a imagem, a cor sempre vai estar no fundo*/
+  position: relative;           /*ele vai ser a referencia espacial para o ::before do overlay*/
+  display: flex;                /*ativa o flexbox*/
+  align-items: center;          /*Se o flex-direction for row (padrão) não collum, ele centraliza verticalmente cima/baixo*/
+  justify-content: center;      /*'''', ele centraliza horizontalmente eixo x esquerda/direita*/
+  padding: 2rem;
+}
+
+/* criação do overlay o before é a ferramenta usada pra criar essa camada */
+.app::before {         /* :: before -> não existe no html mas no layout sim, elemento virtual apenas para estilização */
+  content: "";         /*necessário para o ::before existir, significa que ele não terá texto, só forma visual*/
+  position: absolute;  /*aqui indica que ele precisa de um relative p se referenciar, e pegará o relative ancestal mais próximo*/
+  inset: 0;            /*top:0; right:0; bottom:0; left:0; posicionando em todas as bordas do pai, começando em 0 em todas as direções*/
+  background: linear-gradient(
+    rgba(200, 200, 200, 0.2),                    /*cor do overlay*/
+    rgba(200, 200, 200, 0.1)
+);
+  pointer-events: none;         /*não bloqueia cliques dos botões pq no caso o overlay não será clicavél*/
+  z-index: 0;                   /*determina as camadas como essa é 0 é a primeira as outras virão por cima*/
+}
+
+/* Card do to-do (conteúdo) */
+.to-do-card {
+  position: relative;          /* garantia pra ficar acima do overlay juntamente com o z-index 1*/
+  z-index: 1;
+  width: 80%;
+  max-width: 620px;
+  aspect-ratio: 6/7;          /* define a proporção entre largura e altura 6/7 mais alto que largo*/
+  background: rgba(255, 255, 255, 0.2);       /*leve fundo opaco para contraste*/
+  border-radius: 25px;
+  padding: 1rem 0.5rem;
+  box-shadow: 0 5px 15px 0 rgba(0,0,0,0.1);  /*valores de sombra: 0 esq/dir 5 cima/baixo 15 desfoque 0 espansão 0.1 cor*/
+  backdrop-filter: blur(4px); /*esmaece o fundo atrás do card */
+  color: black;
+}
+
+.to-do-card {
+  h1 { 
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    padding: 1rem;
+   }
+  text-align: center;
+}
+
+input {
+  background: transparent;
+  border: none;
+  outline: none;     /*tirar a borda azul de foco*/
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  color: inherit;    /* usa a cor do pai */
+}
+
+input::placeholder {
+  color:  #1F233D;   
+  opacity: 1;       /*garante que a cor apareça, precalção pq alguns navegadores aplicam opacudade automática no placeholder*/
+}
+
+#input-original {
+  width: 70%;
+  margin: auto auto auto 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: black;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /*sempre fica no elemento base e ease para animação natural*/
+}
+
+#input-original:hover {
+  transform: scale(1.03);            /*transform pode girar, inclinar e o scale é p aumentar no caso 3% */
+}
+
+#input-original:focus {
+  transform: scale(1.03); 
+  background-color: rgba(255, 255, 255, 0.190);
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+.input-edicao {
+  appearance: none;                 /*tira todas as caracteristicas visuais, usar com cuidado*/
+  -webkit-appearance: none;         /*com prefixo p navegadores baseados em webkit p não ignorarem o apparance*/
+  padding: 0;
+  margin: 0;
+
+}
+
+.to-do-card button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  backdrop-filter: blur(6px);
+  font-size: 1.1rem;
+  color:  #000;
+  margin: 1rem;
+  padding: 0.75rem 1.3rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.to-do-card button:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+.to-do-card button:focus {
+  transform: scale(1.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+ul{
+  list-style: none;                 /*tira todas as caracteristicas visuais do modelo de listas do html*/
+}
+
+li {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin: 1.2rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /*1° item grudado na esquerda, ultimo item grudado na direita, os demais se tiver são distibuídos uniformemente no espaço disponível*/
+}
+
+.edit-icon {
+  width: 16px;
+  margin: auto 1rem;
+  vertical-align: middle;         /*alinha o meio vertical da caixa (no caso o icone) com o meio do texto (no caso texto da li)*/
+  cursor: pointer;
+}
+
+.excluir{
+  display: inline-block; /*mistura os dois inline e block pq o inline fica na mesma linha, block pode quebrar a linha, aceita width/height, mas eu quero na mesma linha e controlar tamanho em margem*/
+  margin-right: 1rem;    /*para isso funcionar bem coloquei inline-block*/
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-icon,
+.excluir {
+  transition: transform 0.2s ease;
+}
+
+.edit-icon:hover,
+.excluir:hover {
+  transform: scale(1.3);
+}

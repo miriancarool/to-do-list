@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="stylesheet" href="estilo/style.css">
+    <link rel="preload" href="fotos/montanha_ceu_rosa.jpg" as="image"> <!--preload -> para o navegador começar a baixar o mais cedo possível, o 'as' mostra o que está sendo carregado no caso é uma imagem (importante para o cache adequado, etc.)-->
+</head>
+
+<body>
+    <main class="app">
+        <section class="to-do-card">
+            <h1>Lista de tarefas</h1>
+            <input id="input-original" type="text" placeholder="Digite uma tarefa">
+            <button id="botao-adicionar">Adicionar</button>
+            <ul class="lista-tarefas">
+            </ul>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
