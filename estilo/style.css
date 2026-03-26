@@ -55,6 +55,7 @@ body {
 @media (max-width: 768px) {
   .to-do-card {
     width: 95%;
+    min-width: 18rem;
   }
 }
 
