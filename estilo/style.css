@@ -183,6 +183,15 @@ li {
   justify-content: space-between;  /*1° item grudado na esquerda, ultimo item grudado na direita, os demais se tiver são distibuídos uniformemente no espaço disponível*/
 }
 
+@media (max-width: 768px) {
+  li {
+    padding: 0.5rem;
+    margin: 0,5rem;
+
+    font-size: 1rem;
+  }
+}
+
 .edit-icon {
   width: 16px;
   margin: auto 1rem;
