@@ -147,7 +147,7 @@ input::placeholder {
 @media (max-width: 768px) {
   .to-do-card button {
     padding: 0.5rem;
-    margin: 0;
+    margin: 0 0.5rem 0 0;
   }
 }
 
