@@ -97,14 +97,15 @@ input::placeholder {
 
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(6px);
-  
+
   transition: transform 0.2s ease, box-shadow 0.2s ease; /*sempre fica no elemento base e ease para animação natural*/
 }
 
 @media (max-width: 768px) {
   #input-original {
+    width: 60%;
     padding: 0.5rem;
-    margin: 0;
+    margin: 0.5rem;
   }
 }
 
