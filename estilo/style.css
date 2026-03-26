@@ -52,6 +52,12 @@ body {
   color: black;
 }
 
+@media (max-width: 768px) {
+  .to-do-card {
+    width: 95%;
+  }
+}
+
 .to-do-card {
   h1 { 
     margin: 0 0 1rem;
@@ -114,8 +120,10 @@ input::placeholder {
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   backdrop-filter: blur(6px);
+
   font-size: 1.1rem;
   color:  #000;
+
   margin: 1rem;
   padding: 0.75rem 1.3rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
